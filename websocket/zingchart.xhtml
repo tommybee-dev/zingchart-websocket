@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Apache Tomcat Chart Examples: ZingChart</title>
+    <script src='http://cdn.zingchart.com/zingchart.min.js'></script>
+    
+</head>
+<body onLoad="renderIt(2);">
+	<!--Chart Placement[2]-->
+	<div id="feed"></div>
+	<script type="application/javascript"><![CDATA[
+        //"use strict";
+
+        function renderIt(whichone)
+		{
+			
+			if(whichone == 1)
+				renderIt1();
+			else
+				renderIt2();
+		};
+		
+		function renderIt1()
+		{
+			zingchart.render({
+	            "id" : "feed",
+	            height: 400, 
+		        width: 600,
+	            "data":{
+	                "type":"line",
+	                "title":{
+	                "text":"External WebSocket Transport 1"
+	                },
+	                "scale-x":{
+	                    "transform":{
+	                        "type":"date",
+	                        "text":"%d %M %Y<br>%g:%i:%s",
+	                        "item":{
+	                            "visible":0
+	                        }
+	                    }
+	                },
+	                "series":[{"values":[]}]
+	             }
+	        });
+			
+			//Set up of a websocket
+			var ws = new WebSocket('ws://65.50.232.201:8888/', 'zingchart');
+			
+			//Tell our internal server what to send.
+			ws.onopen = function(){
+			    ws.send('zingchart.feed');
+			    ws.send('zingchart.push');
+			    ws.send('zingchart.getdata');
+			};
+			
+			//Setup an event to call a ZingChart API Method to update our chart.
+			ws.onmessage = function (e) {
+			    var data = JSON.parse(e.data);
+			    var newValue = data['plot0'][1];
+			    var time = data['plot0'][0];
+			    
+			  zingchart.exec('feed', 'appendseriesvalues', {
+			      plotindex : 0,
+			      values : [[time,newValue]]
+			  });
+			  
+			};
+		};
+		function renderIt2()
+		{
+			zingchart.render({
+	            "id" : "feed",
+	            height: 400, 
+		        width: 600,
+	            "data":{
+	                "type":"line",
+	                "title":{
+	                "text":"External WebSocket Transport 2"
+	                },
+	                "scale-x":{
+	                    "transform":{
+	                        "type":"date",
+	                        "text":"%d %M %Y<br>%g:%i:%s",
+	                        "item":{
+	                            "visible":0
+	                        }
+	                    }
+	                },
+	                "series":[{"values":[]}]
+	             }
+	        });
+			
+			//Set up of a websocket
+			var ws = new WebSocket('ws://65.50.232.201:8888/', 'zingchart');
+			
+			//Tell our internal server what to send.
+			ws.onopen = function(){
+			    ws.send('zingchart.feed');
+			    ws.send('zingchart.push');
+			    ws.send('zingchart.getdata');
+			};
+			
+			//Setup an event to call a ZingChart API Method to update our chart.
+			ws.onmessage = function (e) {
+			    var data = JSON.parse(e.data);
+			    var newValue = data['plot0'][1];
+			    var time = data['plot0'][0];
+			    
+			  zingchart.exec('feed', 'appendseriesvalues', {
+			      plotindex : 0,
+			      values : [[time,newValue]]
+			  });
+			  
+			  
+			};
+		};
+    ]]></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<html>
+
+<head>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a></div>
+  <script>
+    var myConfig = {
+      gui: {
+        contextMenu: {
+          position: 'right',
+          docked: true,
+          alpha: 0.9,
+          item: {
+            textAlpha: 1
+          },
+          button: {
+            visible: true
+          }
+        }
+      },
+      graphset: [{
+        type: 'line',
+        borderColor: "#cccccc",
+        borderWidth: 1,
+        borderRadius: 2,
+        plot: {
+          aspect: 'spline'
+        },
+        plotarea: {
+          margin: 'dynamic'
+        },
+        utc: true,
+        timezone: 9,
+        title: {
+          text: 'Uniform Step Time Series Line Chart',
+          adjustLayout: true,
+          align: 'left',
+          marginLeft: '15%'
+        },
+        legend: {
+          draggable: true,
+          backgroundColor: 'transparent',
+          header: {
+            text: "Facility N",
+            backgroundColor: '#f0f0f0'
+          },
+          marker: {
+            visible: false
+          },
+          //item: {
+          //  margin: '5 17 2 0',
+          //  padding: '3 3 3 3',
+          //  fontColor: '#fff',
+          //  cursor: 'hand'
+          //},
+          verticalAlign: 'middle',
+          borderWidth: 0
+        },
+        scaleX: {
+          //minValue: 1484870400000, //set minValue timestamp
+          //minValue: 1512018819470,
+          //step: 'day', //set step for scale
+          //step: '30minute',
+          step: 'second',
+          maxItems: 7,
+          itemsOverlap: true,
+          zooming: true,
+          transform: {
+            type: 'date',
+            all: "%d %M %Y<br>%g:%i:%s"
+          }
+        },
+        preview: {
+          adjustLayout: true,
+          live: true
+        },
+        scaleY: {
+          step: 50,
+          label: {
+            text: 'Sensor'
+          },
+          guide: {
+            lineStyle: 'solid'
+          }
+        },
+        crosshairX: {
+          lineColor: '#555',
+          plotLabel: {
+            backgroundColor: '#fff',
+            multiple: true,
+            borderWidth: 2,
+            borderRadius: 2,
+          },
+          marker: {
+            size: 5,
+            borderWidth: 1,
+            borderColor: '#fff'
+          }
+        },
+        tooltip: {
+          visible: false
+        },
+        series: [{
+          values: [],
+          text: 'Sensor FC-456',
+          legendItem: {
+            backgroundColor: '#29A2CC',
+            borderRadius: 2
+          }
+        }, {
+          values: [],
+          text: 'Sensor AB-265',
+          legendItem: {
+            backgroundColor: '#D31E1E',
+            borderRadius: 2
+          }
+        }, {
+          values: [],
+          text: 'Sensor DC-445',
+          legendItem: {
+            backgroundColor: '#7CA82B',
+            borderRadius: 2
+          }
+        }, {
+          values: [],
+          text: 'Sensor ER-985',
+          legendItem: {
+            backgroundColor: '#EF8535',
+            borderRadius: 2
+          }
+        }]
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: '100%',
+      width: '100%'
+    });
+    
+    //Set up of a websocket
+	//var ws = new WebSocket('ws://65.50.232.201:8888/', 'zingchart');
+	//var ws = new WebSocket('ws://localhost:8080/examples/websocket/chartProgrammatic');
+	var ws = new WebSocket('ws://192.9.112.69:8080/examples/websocket/sychart');
+	
+	
+	//Tell our internal server what to send.
+	ws.onopen = function(){
+		//console.log("########send##########");
+		
+		ws.send('zingchart.feed');
+	    ws.send('zingchart.push');
+	    ws.send('zingchart.getdata');
+	}
+	
+	//Setup an event to call a ZingChart API Method to update our chart.
+	ws.onmessage = function (e) {
+		console.log("===== \n " + JSON.stringify(e.data));
+		console.log("===== \n ");
+		
+		//var data = JSON.parse(e.data);
+		var data = JSON.parse(e.data);
+	    var newValue = data['plot0'][1];
+	    var time = data['plot0'][0];
+	    
+	    //console.log("====> " + time);
+		//console.log("====> " + newValue);
+		
+	  zingchart.exec('myChart', 'appendseriesvalues', {
+	      plotindex : 0,
+	      values : [[time,newValue-20]]
+	  });
+	  
+	  var newValue2 = data['plot1'][1];
+	  var time2 = data['plot1'][0];
+	  
+	  zingchart.exec('myChart', 'appendseriesvalues', {
+	      plotindex : 1,
+	      values : [[time2,newValue2+10]]
+	  });
+	  
+	  var newValue3 = data['plot2'][1];
+	  var time3 = data['plot2'][0];
+	  
+	  zingchart.exec('myChart', 'appendseriesvalues', {
+	      plotindex : 2,
+	      values : [[time3,newValue3+150]]
+	  });
+	  
+	  var newValue4 = data['plot3'][1];
+	  var time4 = data['plot3'][0];
+	  zingchart.exec('myChart', 'appendseriesvalues', {
+	      plotindex : 3,
+	      values : [[time4,newValue4+200]]
+	  });
+	};
+	
+	ws.onclose = function(event) { 
+		console.log('Client notified socket has closed',event); 
+	}; 
+    
+    
+  </script>
+</body>
+
+</html>
