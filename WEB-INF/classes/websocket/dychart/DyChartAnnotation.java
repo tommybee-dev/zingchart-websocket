@@ -124,8 +124,8 @@ public class DyChartAnnotation {
     public void onClose() {
     	System.out.println("...onClose....[]");
         DyChartTimer.removeChart(chart);
-        DyChartTimer.broadcast(String.format("{\"type\": \"leave\", \"id\": %d}",
-                Integer.valueOf(id)));
+        //DyChartTimer.broadcast(String.format("{\"type\": \"leave\", \"id\": %d}",
+        //       Integer.valueOf(id)));
     }
 
 

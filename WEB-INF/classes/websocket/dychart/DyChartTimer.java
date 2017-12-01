@@ -43,11 +43,11 @@ public class DyChartTimer {
 
     protected static synchronized void addChart(Chart chart) {
         if (charts.size() == 0) {
+        	System.out.println("start timer...");
             startTimer();
         }
         charts.put(Integer.valueOf(chart.getId()), chart);
     }
-
 
     protected static Collection<Chart> getCharts() {
         return Collections.unmodifiableCollection(charts.values());
@@ -57,6 +57,7 @@ public class DyChartTimer {
     protected static synchronized void removeChart(Chart chart) {
         charts.remove(Integer.valueOf(chart.getId()));
         if (charts.size() == 0) {
+        	System.out.println("stop timer...");
             stopTimer();
         }
     }
@@ -86,8 +87,7 @@ public class DyChartTimer {
     
 
     protected static void broadcast(String message) {
-        for (Chart chart : DyChartTimer.getCharts()) {
-        	
+        for (Chart chart : DyChartTimer.getCharts()) {   	
             try {
                 //chart.sendMessage(message);
                 chart.sendMessage(DataGenUtil.getRandomMessage());

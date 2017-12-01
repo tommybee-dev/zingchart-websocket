@@ -1,0 +1,744 @@
+<html>
+<head>
+	<!-- <meta charset="utf-8"> -->
+	<meta http-equiv='Content-Type' content='Type=text/html; charset=euc-kr'>
+  <!--Script Reference[1]-->
+  <!--<script src='http://cdn.zingchart.com/zingchart.min.js'></script>-->
+  <script src='zingchart_branded_version/zingchart.min.js' charset="utf-8"></script>
+   <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+
+<body  onLoad="renderGraph();renderGauge();">
+	<div id='myChart' style="height:70%; width:100%; background:#000000"></div>
+	<div id='myGauge' style="height:30%; width:100%; background:#000000"><a class="zc-ref" href="#">Powered by ZingChart</a></div>
+ 
+  <script>
+  	function renderGauge()
+  	{
+  		var myConfig = {
+		      backgroundColor: "#fff",
+		      globals: {
+		        color: "#666"
+		      },
+		      graphset: [{
+		        type: "bar",
+		        x: 0,
+		        y: 0,
+		        width: "31.5%",
+		        height: "100%",
+		        "media-rules": [{
+		          "max-width": 650,
+		          "x": 0,
+		          "y": "2%",
+		          "width": '100%',
+		          "height": "20%",
+		        }, {
+		          "min-width": 651,
+		          x: 0,
+		          y: 0,
+		          width: "31.5%",
+		          height: "100%",
+		        }],
+		        title: {
+		          text: "Value",
+		          "media-rules": [{
+		            "max-width": 650,
+		            "visible": false
+		          }]
+		        },
+		        scaleY: {
+		          lineColor: "none",
+		          values: "0:60:10",
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            margin: 3,
+		            lineWidth: 4,
+		            size: 15,
+		            lineColor: "#5F5F5F",
+		            placement: "outter",
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              lineWidth: 2
+		            }]
+		          },
+		          minorTicks: 4,
+		          minorTick: {
+		            lineColor: "#C1C1C1",
+		            placement: "inner",
+		            size: 7
+		          },
+		          item: {
+		            fontSize: 16,
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              visible: false
+		            }]
+		          }
+		        },
+		        "scale-y-2": {
+		          values: "0:60:10",
+		          lineColor: "none",
+		          item: {
+		            visible: false
+		          },
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            placement: "inner",
+		            size: 40,
+		            padding: 0,
+		            margin: 0,
+		            offsetX: 50,
+		            lineColor: "#fff",
+		            rules: [{
+		              rule: "%i == 0 || %i == 10",
+		              visible: false
+		            }]
+		          }
+		        },
+		        plotarea: {
+		           marginBottom: "30%",
+		          marginTop: "10%",
+		          _marginRight: "35%"
+		        },
+		        plot: {
+		          barsOverlap: "100%",
+		          borderRadius: 2,
+		          hoverState: {
+		            visible: false
+		          },
+		          tooltip: {
+		            visible: false
+		          }
+		        },
+		        tooltip: {
+		          visible: false
+		        },
+		        series: [{
+		          values: [100],
+		          backgroundColor: "#fff",
+		          borderWidth: 4,
+		          borderColor: "#C1C1C1",
+		          maxTrackers: 0,
+		          barWidth: "100%",
+		          tooltip: {
+		            visble: false
+		          }
+		        }, {
+		          values: [80],
+		          backgroundColor: "#F8B237",
+		          barWidth: "93%",
+		          maxTrackers: 0,
+		          tooltip: {
+		            visble: false
+		          },
+		          valueBox: {
+		            text: "%v",
+		            placement: "bottom-out",
+		            offsetY: 0,
+		            fontSize: 28,
+		            fontColor: "#515151",
+		          }
+		        }]
+		      }, {
+		        type: "bar",
+		        x: "34.5%",
+		        y: 0,
+		        width: "31.5%",
+		        height: "100%",
+		        "media-rules": [{
+		          "max-width": 650,
+		          "x": 0,
+		          "y": "20%",
+		          "width": '100%',
+		          "height": "20%",
+		        }, {
+		          "min-width": 651,
+		          x: "34.5%",
+		          y: 0,
+		          width: "31.5%",
+		          height: "100%",
+		        }],
+		        title: {
+		          text: "Value1",
+		          "media-rules": [{
+		            "max-width": 650,
+		            "visible": false
+		          }]
+		        },
+		        scaleY: {
+		          lineColor: "none",
+		          values: "0:60:10",
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            margin: 3,
+		            lineWidth: 4,
+		            size: 15,
+		            lineColor: "#5F5F5F",
+		            placement: "outter",
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              lineWidth: 2
+		            }]
+		          },
+		          minorTicks: 4,
+		          minorTick: {
+		            lineColor: "#C1C1C1",
+		            placement: "inner",
+		            size: 7
+		          },
+		          item: {
+		            fontSize: 16,
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              visible: false
+		            }]
+		          }
+		        },
+		        "scale-y-2": {
+		          values: "0:60:10",
+		          lineColor: "none",
+		          item: {
+		            visible: false
+		          },
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            placement: "inner",
+		            size: 40,
+		            padding: 0,
+		            margin: 0,
+		            offsetX: 50,
+		            lineColor: "#fff",
+		            rules: [{
+		              rule: "%i == 0 || %i == 10",
+		              visible: false
+		            }]
+		          }
+		        },
+		        plot: {
+		          barsOverlap: "100%",
+		          borderRadius: 2,
+		          hoverState: {
+		            visible: false
+		          },
+		          tooltip: {
+		            visible: false
+		          }
+		        },
+		        plotarea: {
+		          marginBottom: "30%",
+		          marginTop: "10%",
+		          _marginRight: "35%"
+		        },
+		        scaleX: {
+		          visible: false
+		        },
+		        tooltip: {
+		          visible: false
+		        },
+		        series: [{
+		          values: [100],
+		          backgroundColor: "#fff",
+		          borderWidth: 4,
+		          borderColor: "#C1C1C1",
+		          maxTrackers: 0,
+		          barWidth: "100%",
+		          tooltip: {
+		            visble: false
+		          }
+		        }, {
+		          values: [80],
+		          backgroundColor: "#F8B237",
+		          barWidth: "93%",
+		          maxTrackers: 0,
+		          tooltip: {
+		            visble: false
+		          },
+		          valueBox: {
+		            text: "%v",
+		            placement: "bottom-out",
+		            offsetY: 0,
+		            fontSize: 28,
+		            fontColor: "#515151",
+		          }
+		        }]
+		      }, {
+		        type: "bar",
+		        x: "69%",
+		        y: 0,
+		        width: "31.5%",
+		        height: "100%",
+		        "media-rules": [{
+		          "max-width": 650,
+		          "x": 0,
+		          "y": "40%",
+		          "width": '100%',
+		          "height": "20%",
+		        }, {
+		          "min-width": 651,
+		          "x": "69%",
+		          "y": 0,
+		          "width": "31.5%",
+		          "height": "100%",
+		        }],
+		        title: {
+		          text: "Value2",
+		          "media-rules": [{
+		            "max-width": 650,
+		            "visible": false
+		          }]
+		        },
+		        scaleY: {
+		          lineColor: "none",
+		          values: "0:60:10",
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            margin: 3,
+		            lineWidth: 4,
+		            size: 15,
+		            lineColor: "#5F5F5F",
+		            placement: "outter",
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              lineWidth: 2
+		            }]
+		          },
+		          minorTicks: 4,
+		          minorTick: {
+		            lineColor: "#C1C1C1",
+		            placement: "inner",
+		            size: 7
+		          },
+		          item: {
+		            fontSize: 16,
+		            rules: [{
+		              rule: "%i % 2 == 1",
+		              visible: false
+		            }]
+		          }
+		        },
+		        "scale-y-2": {
+		          values: "0:60:10",
+		          lineColor: "none",
+		          item: {
+		            visible: false
+		          },
+		          guide: {
+		            visible: false
+		          },
+		          tick: {
+		            placement: "inner",
+		            size: 40,
+		            padding: 0,
+		            margin: 0,
+		            offsetX: 50,
+		            lineColor: "#fff",
+		            rules: [{
+		              rule: "%i == 0 || %i == 10",
+		              visible: false
+		            }]
+		          }
+		        },
+		        plot: {
+		          barsOverlap: "100%",
+		          borderRadius: 2,
+		          hoverState: {
+		            visible: false
+		          },
+		          tooltip: {
+		            visible: false
+		          }
+		        },
+		        plotarea: {
+		          marginBottom: "30%",
+		          marginTop: "10%",
+		          _marginRight: "35%"
+		        },
+		        scaleX: {
+		          visible: false
+		        },
+		        tooltip: {
+		          visible: false
+		        },
+		        series: [
+		        {
+		          values: [100],
+		          backgroundColor: "#fff",
+		          borderWidth: 4,
+		          borderColor: "#C1C1C1",
+		          maxTrackers: 0,
+		          barWidth: "100%",
+		          tooltip: {
+		            visble: false
+		          }
+		        }, {
+		          values: [80],
+		          backgroundColor: "#F8B237",
+		          barWidth: "93%",
+		          maxTrackers: 0,
+		          tooltip: {
+		            visble: false
+		          },
+		          valueBox: {
+		            text: "%v",
+		            placement: "bottom-out",
+		            offsetY: 0,
+		            fontSize: 28,
+		            fontColor: "#515151",
+		          }
+		        }
+		        ]
+		      }]
+		    };
+		
+		    zingchart.render({
+		      id: 'myGauge',
+		      data: myConfig,
+		      height: "100%",
+		      width: '100%'
+		    });
+		
+  	}
+  	function setGaugeValue(num1,num2,num3)
+  	{
+		var colors = ['#D31E1E', '#7CA82B', '#EF8535'];
+		var Marker = function(bgColor, ceiling) {
+			return {
+			  type: "area",
+			  range: [0, ceiling],
+			  backgroundColor: bgColor,
+			  alpha: .95,
+			}
+		};
+		//var randomOffset0 = [-5, 5, 3, -3, 2, -2];
+		//var randomOffset1 = [10, -10, -5, 5, 3, -3, 2, -2, 7, -7];
+		//var output0 = Math.ceil(33 + randomOffset0[Math.floor(Math.random() * 6)]);
+		//var output1 = Math.ceil(11 + randomOffset0[Math.floor(Math.random() * 6)]);
+		//var output2 = Math.ceil(22 + randomOffset1[Math.floor(Math.random() * 9)]);
+
+		// 1) update gauge values
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 0,
+			plotindex: 0,
+			update: false,
+				data: {
+				values: [num1]
+			}
+		});
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 0,
+			plotindex: 1,
+			update: false,
+				data: {
+				values: [num1]
+			}
+		});
+		
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 1,
+			plotindex: 0,
+			update: false,
+			data: {
+				values: [num2]
+			}
+		});
+		
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 1,
+			plotindex: 1,
+			update: false,
+			data: {
+				values: [num2]
+			}
+		});
+		
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 2,
+			plotindex: 0,
+			update: false,
+			data: {
+				values: [num3]
+			}
+		});
+		
+		zingchart.exec('myGauge', 'appendseriesdata', {
+			graphid: 2,
+			plotindex: 1,
+			update: false,
+			data: {
+				values: [num3]
+			}
+		});
+
+		// 2) update guage markers
+		zingchart.exec('myGauge', 'modify', {
+			graphid: 0,
+			update: false,
+			data: {
+				scaleR: {
+					markers: [
+						Marker(colors[0], num1)
+					]
+				}
+			}
+		});
+		zingchart.exec('myGauge', 'modify', {
+			graphid: 1,
+			update: false,
+			data: {
+				scaleR: {
+					markers: [
+						Marker(colors[1], num2)
+					]
+				}
+			}
+		});
+		zingchart.exec('myGauge', 'modify', {
+			graphid: 2,
+			update: false,
+			data: {
+				scaleR: {
+					markers: [
+						Marker(colors[2], num3)
+					]
+				}
+			}
+		});
+
+		// batch update all chart modifications
+		zingchart.exec('myGauge', 'update');
+
+  	}
+  	function renderGraph()
+	{
+		var myConfig = {
+	      gui: {
+	        contextMenu: {
+	          position: 'right',
+	          docked: true,
+	          alpha: 0.9,
+	          item: {
+	            textAlpha: 1
+	          },
+	          button: {
+	            visible: true
+	          }
+	        }
+	      },
+	      graphset: [{
+	        type: 'line',
+	        borderColor: "#cccccc",
+	        borderWidth: 1,
+	        borderRadius: 2,
+	        plot: {
+	          aspect: 'spline'
+	        },
+	        plotarea: {
+	          margin: 'dynamic'
+	        },
+	        utc: true,
+	        timezone: 9,
+	        title: {
+	          text: 'Demo',
+	          adjustLayout: true,
+	          align: 'left',
+	          marginLeft: '15%'
+	        },
+	        legend: {
+	          draggable: true,
+	          backgroundColor: 'transparent',
+	          header: {
+	            text: "Legend",
+	            backgroundColor: '#f0f0f0'
+	          },
+	          marker: {
+	            visible: false
+	          },
+	          Item: {
+	            margin: '5 17 2 0',
+	            padding: '3 3 3 3',
+	            fontColor: '#fff',
+	            cursor: 'hand'
+	          },
+	          verticalAlign: 'middle',
+	          borderWidth: 0
+	        },
+	        scaleX: {
+	          //minValue: 1484870400000, //set minValue timestamp
+	          //minValue: 1512018819470,
+	          //step: 'day', //set step for scale
+	          //step: '30minute',
+	          step: 'second',
+	          maxItems: 7,
+	          itemsOverlap: true,
+	          zooming: true,
+	          transform: {
+	            type: 'date',
+	            all: "%d %M %Y<br>%g:%i:%s"
+	          }
+	        },
+	        preview: {
+	          adjustLayout: true,
+	          live: true
+	        },
+	        scaleY: {
+	          step: 10,
+	          format: '%v¡ÆC',
+	          label: {
+	            text: 'Title'
+	          },
+	          guide: {
+	            lineStyle: 'solid'
+	          }
+	        },
+	        crosshairX: {
+	          lineColor: '#555',
+	          alpha: .3,
+	          plotLabel: {
+	            //backgroundColor: '#fff',
+	            backgroundColor: '#e0e0e0',
+	            multiple: true,
+	            borderWidth: 2,
+	            borderRadius: 2,
+	            text: '<span style="color:%color">%v¡Æ</span>'
+	          },
+	          marker: {
+	            size: 5,
+	            borderWidth: 1,
+	            borderColor: '#fff'
+	          }
+	        },
+	        tooltip: {
+	          visible: false
+	        },
+	        series: [{
+	          values: [],
+	          text: 'Value',
+	          legendItem: {
+	            backgroundColor: '#29A2CC',
+	            borderRadius: 2
+	          }
+	        }, {
+	          values: [],
+	          text: 'Value2',
+	          legendItem: {
+	            backgroundColor: '#D31E1E',
+	            borderRadius: 2
+	          }
+	        }, {
+	          values: [],
+	          text: 'Value3',
+	          legendItem: {
+	            backgroundColor: '#7CA82B',
+	            borderRadius: 2
+	          }
+	        }, {
+	          values: [],
+	          text: 'Value4',
+	          legendItem: {
+	            backgroundColor: '#EF8535',
+	            borderRadius: 2
+	          }
+	        }]
+	      }]
+	    };
+	
+	    zingchart.render({
+	      id: 'myChart',
+	      data: myConfig,
+	      height: '100%',
+	      width: '100%'
+	    });
+	    
+	    //Set up of a websocket
+		//var ws = new WebSocket('ws://65.50.232.201:8888/', 'zingchart');
+		//var ws = new WebSocket('ws://localhost:8080/examples/websocket/chartProgrammatic');
+		//alert(window.location.host);
+		var ws = new WebSocket('ws://'+ window.location.host +'/examples/websocket/sychart');
+		
+		
+		//Tell our internal server what to send.
+		ws.onopen = function(){
+			ws.send('zingchart.feed');
+		    ws.send('zingchart.push');
+		    ws.send('zingchart.getdata');
+		}
+		
+		//Setup an event to call a ZingChart API Method to update our chart.
+		ws.onmessage = function (e) {
+			//console.log("===== \n " + JSON.stringify(e.data));
+			//console.log("===== \n ");
+			//var data = JSON.parse(e.data);
+			var data = JSON.parse(e.data);
+		    var newValue = data['plot0'][1];
+		    var time = data['plot0'][0];
+			    
+		    //console.log("====> " + time);
+			//console.log("====> " + newValue);
+			
+			zingchart.exec('myChart', 'appendseriesvalues', {
+			  plotindex : 0,
+			  values : [[time,newValue]]
+			});
+			  
+			var newValue2 = data['plot1'][1];
+			var time2 = data['plot1'][0];
+			
+			zingchart.exec('myChart', 'appendseriesvalues', {
+			  plotindex : 1,
+			  values : [[time2,newValue2]]
+			});
+			
+			var newValue3 = data['plot2'][1];
+			var time3 = data['plot2'][0];
+			
+			zingchart.exec('myChart', 'appendseriesvalues', {
+			  plotindex : 2,
+			  values : [[time3,newValue3]]
+			});
+			
+			var newValue4 = data['plot3'][1];
+			var time4 = data['plot3'][0];
+			zingchart.exec('myChart', 'appendseriesvalues', {
+			  plotindex : 3,
+			  values : [[time4,newValue4]]
+			});
+			
+			setGaugeValue(newValue2,newValue3,newValue4);
+		};
+		
+		//zingchart.exec('myChart', 'update');
+		
+		ws.onclose = function(event) { 
+			console.log('Client notified socket has closed',event); 
+		}; 
+	}
+	</script>
+</body>
+
+</html>
